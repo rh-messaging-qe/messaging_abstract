@@ -3,7 +3,7 @@
 """
 
 from .client import Client
-from ..message import Message
+from messaging_abstract.message import Message
 
 
 class Sender(Client):

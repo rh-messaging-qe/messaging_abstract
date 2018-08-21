@@ -1,5 +1,6 @@
 *.pyenv*
 logs
+dist
 .idea
 *.py[co]
 *.idea
