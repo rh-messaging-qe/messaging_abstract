@@ -2,11 +2,9 @@
     # TODO jstejska: Package description
 """
 from iqa_common.executor import Executor
-from messaging_abstract.component.client.receiver import Receiver
-
 from messaging_abstract.message import Message
 from messaging_abstract.node.node import Node
-from .client import Client, ClientExternal
+from .client import Client
 
 
 class Receiver(Client):

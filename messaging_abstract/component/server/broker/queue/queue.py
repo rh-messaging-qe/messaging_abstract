@@ -2,7 +2,7 @@
 @TODO: dlenoch: Publish-Subscribe | queue routing type (Anycast, Multicast)
 @TODO: dlenoch: Point-to-Point | More queues on one Address
 """
-from messaging_abstract.broker.address import Address
+from messaging_abstract.component.server.broker import Address
 
 
 class QueueAnycast:

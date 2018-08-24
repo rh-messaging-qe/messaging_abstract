@@ -4,11 +4,9 @@
 
 from autologging import logged, traced
 
-from messaging_abstract.component.client import Client
-from messaging_abstract.broker import Broker
-from messaging_abstract.router import Router
-from iqa_common.executor import Executor, Command, Execution, ExecutorAnsible
-import re, copy
+from iqa_common.executor import Executor, Command, Execution, ExecutorAnsible, CommandAnsible
+import re
+import copy
 
 
 @logged
@@ -21,7 +19,6 @@ class Node:
         Node.__log.info('Initialization of node %s..' % self.hostname)
         self.executor = executor
         self.ip = ip if ip else self._get_ip()
-        self.components = []  # type:
 
     def execute(self, command: Command) -> Execution:
         """Execute command on node"""
@@ -29,17 +26,16 @@ class Node:
 
     def ping(self) -> bool:
         """Send ping to node"""
-        executor = copy.deepcopy(self.executor)
         cmd_ping = Command([], stdout=True, timeout=20)
-        if isinstance(executor, ExecutorAnsible):
-            executor.module = 'ping'
+        if isinstance(self.executor, ExecutorAnsible):
+            cmd_ping = CommandAnsible(ansible_module="ping", stdout=True, timeout=20)
         else:
             cmd_ping.args = ['ping', '-c', '1', self._get_ip()]
 
-        execution = executor.execute(cmd_ping)
+        execution = self.executor.execute(cmd_ping)
 
         # True if completed with exit code 0 and stdout has some data
-        return execution.completed_successfully() and execution.read_stdout()
+        return execution.completed_successfully() and bool(execution.read_stdout())
 
     def _get_ip(self):
         """Get ip of node"""
@@ -67,45 +63,3 @@ class Node:
             return None
 
         return ip_addresses[0]
-
-    def new_component(self, component):
-        """Adding component to under node.
-
-        :param component:
-        :type component:
-
-        :return: Component object
-        :rtype:
-        """
-        component = component(node=self)
-        self.components.append(component)
-        return component
-
-    @property
-    def brokers(self):
-        """
-        Get all broker instances on this node
-        :return:
-        """
-        return [component for component in self.components
-                if issubclass(component, Broker)]
-
-    @property
-    def clients(self):
-        """
-        Get all client instances on this node
-        @TODO
-        :return:
-        """
-        return [component for component in self.components
-                if issubclass(component, Client)]
-
-    @property
-    def routers(self):
-        """
-        Get all router instances on this node
-        @TODO
-        :return:
-        """
-        return [component for component in self.components
-                if issubclass(component, Router)]
