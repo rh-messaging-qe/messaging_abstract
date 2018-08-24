@@ -15,7 +15,6 @@ class Client(Component):
 
     # Required variables
     supported_protocols = []
-    implementation = ''
     version = ''
 
     def __init__(self, name: str, node: Node, executor: Executor):
@@ -48,7 +47,7 @@ class ClientExternal(Client):
     def command(self) -> ClientCommand:
         return self._command
 
-    def new_command(self, stdout: bool=False, stderr: bool=False,
+    def _new_command(self, stdout: bool=False, stderr: bool=False,
                 daemon: bool=False, timeout: int=0,
                 encoding: str="utf-8") -> ClientCommand:
         raise NotImplementedError

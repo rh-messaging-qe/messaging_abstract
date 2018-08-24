@@ -11,7 +11,7 @@ class Router(Server):
     """
 
     def __init__(self, name: str, node: Node, executor: Executor, service: Service,
-                 port=5672, config=None):
+                 port=5672, config=None, **kwargs):
         super(Router, self).__init__(name, node, executor, service)
-        self.port = port
-        self.config = config
+        self.port = kwargs.get('router_port', port)
+        self.config = kwargs.get('router_config', config)

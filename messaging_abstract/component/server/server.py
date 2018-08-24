@@ -1,4 +1,4 @@
-from executor import Executor
+from iqa_common.executor import Executor
 
 from messaging_abstract.component.component import Component
 from messaging_abstract.component.server.service import Service
