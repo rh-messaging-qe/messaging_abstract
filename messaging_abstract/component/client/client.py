@@ -41,7 +41,8 @@ class ClientExternal(Client):
     def __init__(self, name: str, node: Node, executor: Executor):
         super(ClientExternal, self).__init__(name, node, executor)
         self.execution = None  # type: Execution
-        self._command = self._new_command(stdout=True, timeout=ClientExternal.TIMEOUT)  # type: ClientCommand
+        self._command = self._new_command(stdout=True, timeout=ClientExternal.TIMEOUT,
+                                          daemon=True)  # type: ClientCommand
 
     @property
     def command(self) -> ClientCommand:
@@ -50,4 +51,7 @@ class ClientExternal(Client):
     def _new_command(self, stdout: bool=False, stderr: bool=False,
                 daemon: bool=False, timeout: int=0,
                 encoding: str="utf-8") -> ClientCommand:
+        raise NotImplementedError
+
+    def set_url(self, url: str):
         raise NotImplementedError

@@ -31,7 +31,8 @@ class Message:
             properties=Properties(),
             application_properties=None,
             application_data=ApplicationData(),
-            footer=Footer()):
+            footer=Footer(),
+            body=None):
 
         if application_properties is None:
             application_properties = ApplicationProperties()
@@ -42,3 +43,4 @@ class Message:
         self.application_properties = application_properties
         self.application_data = application_data
         self.footer = footer
+        self.body = body
