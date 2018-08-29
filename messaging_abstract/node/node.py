@@ -30,6 +30,9 @@ class Node:
         if isinstance(self.executor, ExecutorAnsible):
             cmd_ping = CommandAnsible(ansible_module="ping", stdout=True, timeout=20)
         else:
+            # If unable to determine ip address, then do not perform ping
+            if self._get_ip() is None:
+                return False
             cmd_ping.args = ['ping', '-c', '1', self._get_ip()]
 
         execution = self.executor.execute(cmd_ping)

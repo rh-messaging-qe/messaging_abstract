@@ -1,6 +1,9 @@
 """
     # TODO jstejska: Package description
 """
+import tempfile
+from io import FileIO
+
 from iqa_common.executor import Executor
 from messaging_abstract.node.node import Node
 from .client import Client
