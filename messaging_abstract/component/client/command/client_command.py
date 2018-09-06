@@ -92,9 +92,7 @@ class ReceiverClientCommand(ClientCommand):
         self.logging = LoggingOptionsSenderReceiver()
         self.transaction = TransactionOptionsSenderReceiver()
         self.connection = ConnectionOptionsCommon()
-        self.link = LinkOptionsReceiver()
         self.receiver = ReceiverOptions()
-        self.reactor = ReactorOptionsReceiver()
 
 
 class SenderClientCommand(ClientCommand):
@@ -110,6 +108,4 @@ class SenderClientCommand(ClientCommand):
         self.logging = LoggingOptionsSenderReceiver()
         self.transaction = TransactionOptionsSenderReceiver()
         self.connection = ConnectionOptionsCommon()
-        self.link = LinkOptionsSenderReceiver()
         self.message = MessageOptionsSender()
-        self.reactor = ReactorOptionsSenderReceiver()
