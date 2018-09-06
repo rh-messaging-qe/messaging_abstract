@@ -100,9 +100,7 @@ class ControlOptionsReceiver(ControlOptionsSenderReceiver):
         self.dynamic = dynamic  # type: bool
 
     def valid_options(self) -> list:
-        return super(ControlOptionsReceiver, self).valid_options() + [
-            Toggle('dynamic', '--dynamic')
-        ]
+        return super(ControlOptionsReceiver, self).valid_options()
 
 
 class LoggingOptionsCommon(ClientOptionsBase):
@@ -157,24 +155,14 @@ class ConnectionOptionsCommon(ClientOptionsBase):
     """
     def __init__(self, urls: str=None, reconnect: bool=None, reconnect_interval: int=None,
                  reconnect_limit: int=None, reconnect_timeout: int=None, heartbeat: int=None,
-                 ssl_cert: str=None, ssl_priv_key: str=None, ssl_passwd: str=None,
-                 ssl_trust_store: str=None, ssl_verify_peer: bool=None, ssl_verify_peer_name: bool=None,
-                 handler: str=None, max_frame_size: int=None, allowed_mechs: str=None):
+                 max_frame_size: int=None):
         self.conn_urls = urls  # type: str
         self.conn_reconnect = reconnect  # type: bool
         self.conn_reconnect_interval = reconnect_interval  # type: int
         self.conn_reconnect_limit = reconnect_limit  # type: int
         self.conn_reconnect_timeout = reconnect_timeout  # type: int
         self.conn_heartbeat = heartbeat  # type: int
-        self.conn_ssl_certificate = ssl_cert  # type: str
-        self.conn_ssl_private_key = ssl_priv_key  # type: str
-        self.conn_ssl_password = ssl_passwd  # type: str
-        self.conn_ssl_trust_store = ssl_trust_store  # type: str
-        self.conn_ssl_verify_peer = ssl_verify_peer  # type: bool
-        self.conn_ssl_verify_peer_name = ssl_verify_peer_name  # type: bool
-        self.conn_handler = handler  # type: str
         self.conn_max_frame_size = max_frame_size  # type: int
-        self.conn_allowed_mechs = allowed_mechs  # type: str
 
     def valid_options(self) -> list:
         return [
@@ -184,12 +172,6 @@ class ConnectionOptionsCommon(ClientOptionsBase):
             Prefixed('conn-reconnect-limit', '--conn-reconnect-limit'),
             Prefixed('conn-reconnect-timeout', '--conn-reconnect-timeout'),
             Prefixed('conn-heartbeat', '--conn-heartbeat'),
-            Prefixed('conn-ssl-certificate', '--conn-ssl-certificate'),
-            Prefixed('conn-ssl-password', '--conn-ssl-password'),
-            Prefixed('conn-ssl-trust-store', '--conn-ssl-trust-store'),
-            Toggle('conn-ssl-verify-peer', '--conn-ssl-verify-peer'),
-            Toggle('conn-ssl-verify-peer-name', '--conn-ssl-verify-peer-name'),
-            Prefixed('conn-handler', '--conn-handler'),
             Prefixed('conn-max-frame-size', '--conn-max-frame-size')
         ]
 
@@ -296,28 +278,16 @@ class ReceiverOptions(ClientOptionsBase):
     """
     Common client options for all Receiver client commands
     """
-    def __init__(self, process_reply_to: str=None, action: str=None, action_size: int=None,
-                 recv_selector: str=None, recv_filter: str=None, recv_browse: bool=None,
-                 recv_consume: bool=None, recv_listen: bool=None):
+    def __init__(self, process_reply_to: str=None, action: str=None, recv_browse: bool=None):
         self.process_reply_to = process_reply_to  # type: str
         self.action = action  # type: str
-        self.action_size = action_size  # type: int
-        self.recv_selector = recv_selector  # type: str
-        self.recv_filter = recv_filter  # type: str
         self.recv_browse = recv_browse  # type: bool
-        self.recv_consume = recv_consume  # type: bool
-        self.recv_listen = recv_listen  # type: bool
 
     def valid_options(self) -> list:
         return [
             Prefixed('process-reply-to', '--process-reply-to'),
             Prefixed('action', '--action'),
-            Prefixed('action-size', '--action-size'),
-            Prefixed('recv-selector', '--recv-selector'),
             Toggle('recv-browse', '--recv-browse'),
-            Toggle('recv-consume', '--recv-consume'),
-            Prefixed('recv-filter', '--recv-filter'),
-            Toggle('recv-listen', '--recv-listen')
         ]
 
 
@@ -325,33 +295,10 @@ class ReactorOptionsSenderReceiver(ClientOptionsBase):
     """
     Common reactor options for all Sender and Receiver client commands
     """
-    def __init__(self, reactor_auto_settle_off: bool=None,
-                 reactor_peer_close_is_error: bool=None):
+    def __init__(self, reactor_auto_settle_off: bool=None):
         self.reactor_auto_settle_off = reactor_auto_settle_off  # type: bool
-        self.reactor_peer_close_is_error = reactor_peer_close_is_error  # type: bool
 
     def valid_options(self) -> list:
         return [
-            Toggle('reactor-peer-close-is-error', '--reactor-peer-close-is-error'),
             Toggle('reactor-auto-settle-off', '--reactor-auto-settle-off')
-        ]
-
-
-class ReactorOptionsReceiver(ReactorOptionsSenderReceiver):
-    """
-    Common reactor options for all Receiver client commands
-    """
-    def __init__(self, reactor_auto_settle_off: bool=None,
-                 reactor_peer_close_is_error: bool=None,
-                 reactor_prefetch: int=None,
-                 reactor_auto_accept: bool=None):
-        super(ReactorOptionsReceiver, self).__init__(reactor_auto_settle_off,
-                                                     reactor_peer_close_is_error)
-        self.reactor_prefetch = reactor_prefetch  # type: int
-        self.reactor_auto_accept = reactor_auto_accept  # type: bool
-
-    def valid_options(self) -> list:
-        return super(ReactorOptionsReceiver, self).valid_options() + [
-            Prefixed('reactor-prefetch', '--reactor-prefetch'),
-            Toggle('reactor-auto-accept', '--reactor-auto-accept')
         ]

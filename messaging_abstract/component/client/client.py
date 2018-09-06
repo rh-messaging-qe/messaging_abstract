@@ -36,17 +36,21 @@ class Client(Component):
 
 class ClientExternal(Client):
 
-    TIMEOUT = 20
+    TIMEOUT = 30
 
     def __init__(self, name: str, node: Node, executor: Executor):
         super(ClientExternal, self).__init__(name, node, executor)
         self.execution = None  # type: Execution
-        self._command = self._new_command(stdout=True, timeout=ClientExternal.TIMEOUT,
-                                          daemon=True)  # type: ClientCommand
+        self._command = None  # type: ClientCommand
+        self.reset_command()
 
     @property
     def command(self) -> ClientCommand:
         return self._command
+
+    def reset_command(self):
+        self._command = self._new_command(stdout=True, timeout=ClientExternal.TIMEOUT,
+                                          daemon=True)  # type: ClientCommand
 
     def _new_command(self, stdout: bool=False, stderr: bool=False,
                 daemon: bool=False, timeout: int=0,
@@ -54,4 +58,7 @@ class ClientExternal(Client):
         raise NotImplementedError
 
     def set_url(self, url: str):
+        raise NotImplementedError
+
+    def set_auth_mechs(self, mechs: str):
         raise NotImplementedError
