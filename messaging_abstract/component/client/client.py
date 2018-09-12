@@ -62,3 +62,7 @@ class ClientExternal(Client):
 
     def set_auth_mechs(self, mechs: str):
         raise NotImplementedError
+
+    def set_ssl_auth(self, pem_file: str=None, key_file: str=None, keystore: str=None,
+                     keystore_pass: str=None, keystore_alias: str=None):
+        raise NotImplementedError
