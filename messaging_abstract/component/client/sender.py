@@ -13,13 +13,13 @@ from messaging_abstract.message import Message
 class Sender(Client):
     """Abstract class of client's senders."""
 
-    def __init__(self, name: str, node: Node, executor: Executor, message_buffer: bool=False):
+    def __init__(self, name: str, node: Node, executor: Executor, message_buffer: bool=False, **kwargs):
         """Init
 
         :param message_buffer: # TODO jstejska: description
         :type message_buffer: # TODO jstejska: type
         """
-        super(Sender, self).__init__(name, node, executor)
+        super(Sender, self).__init__(name, node, executor, **kwargs)
         # Sender settings
         self.message_buffer = message_buffer  # type: bool
         self.messages = []  # type: list

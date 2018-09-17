@@ -10,8 +10,8 @@ from .client import Client
 class Receiver(Client):
     """Abstract class of client's receivers."""
 
-    def __init__(self, name: str, node: Node, executor: Executor, message_buffer=True):
-        super(Receiver, self).__init__(name, node, executor)
+    def __init__(self, name: str, node: Node, executor: Executor, message_buffer=True, **kwargs):
+        super(Receiver, self).__init__(name, node, executor, **kwargs)
 
         # Sender settings
         self.message_buffer = message_buffer  # type: bool
