@@ -15,3 +15,28 @@ class Router(Server):
         super(Router, self).__init__(name, node, executor, service)
         self.port = kwargs.get('router_port', port)
         self.config = kwargs.get('router_config', config)
+        self.user = None
+        self.password = None
+        self.pem_file = None
+        self.key_file = None
+        self.key_password = None
+
+        # initializing client from kwargs
+        for func in [self.set_credentials, self.set_ssl_auth]:
+            self.call_if_all_arguments_in_kwargs(func, **kwargs)
+
+    def set_credentials(self, user: str=None, password: str=None):
+        self.user = user
+        self.password = password
+
+    def set_ssl_auth(self, pem_file: str=None, key_file: str=None, key_password: str=None):
+        self.pem_file = pem_file
+        self.key_file = key_file
+        # Set to None when empty as well
+        self.key_password = None if not key_password else key_password
+
+    def has_credentials(self) -> bool:
+        return self.user and self.password
+
+    def has_ssl_keys(self):
+        return self.pem_file and self.key_file
