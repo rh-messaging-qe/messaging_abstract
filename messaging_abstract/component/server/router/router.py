@@ -26,10 +26,25 @@ class Router(Server):
             self.call_if_all_arguments_in_kwargs(func, **kwargs)
 
     def set_credentials(self, user: str=None, password: str=None):
+        """
+        Stores user and password that must be used to communicate with the router instance
+        through the main port defined in constructor method.
+        :param user:
+        :param password:
+        :return:
+        """
         self.user = user
         self.password = password
 
     def set_ssl_auth(self, pem_file: str=None, key_file: str=None, key_password: str=None):
+        """
+        Defines SSL credentials that must be used to communicate with this router instance
+        through its main port.
+        :param pem_file:
+        :param key_file:
+        :param key_password:
+        :return:
+        """
         self.pem_file = pem_file
         self.key_file = key_file
         # Set to None when empty as well

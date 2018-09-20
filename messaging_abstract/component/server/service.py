@@ -15,6 +15,9 @@ class ServiceStatus(Enum):
 
 
 class Service(object):
+    """
+    Represents a service used to control a Server component (Router or Broker).
+    """
 
     TIMEOUT = 20
 
@@ -47,6 +50,9 @@ class Service(object):
 
 
 class ServiceSystem(Service):
+    """
+    Implementation of a systemd or initd service used to manage a Server component.
+    """
 
     class ServiceSystemState(Enum):
         STARTED = ('start', 'started')
@@ -124,6 +130,11 @@ class ServiceSystem(Service):
 
 
 class ServiceDocker(Service):
+    """
+    Implementation of a service represented by a docker container.
+    So startup and shutdown are done by managing current state of related
+    docker container name.
+    """
 
 
     class ServiceDockerState(Enum):
