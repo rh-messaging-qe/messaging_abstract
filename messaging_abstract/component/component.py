@@ -4,6 +4,9 @@ from inspect import signature
 
 
 class Component(object):
+    """
+    Main class that represents a messaging component.
+    """
 
     def __init__(self, name: str, node: Node, executor: Executor):
         self.name: str = name
