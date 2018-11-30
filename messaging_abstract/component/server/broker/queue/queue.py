@@ -1,25 +1,18 @@
 """
-@TODO: dlenoch: Publish-Subscribe | queue routing type (Anycast, Multicast)
-@TODO: dlenoch: Point-to-Point | More queues on one Address
+Represents a generic Queue entity.
 """
-from messaging_abstract.component.server.broker import Address
 
-
-class QueueAnycast:
-    pass
-
-
-class QueueMulticast:
-    pass
+from messaging_abstract.component.server.broker.address import Address
+from messaging_abstract.component.server.broker.route import RoutingType
 
 
 class Queue:
-    """
-    Abstract Queue class
-    """
-    def __init__(self, name: str, address: Address, messages=None):
-        if messages is None:
-            messages = []
+    def __init__(self, name: str, routing_type: RoutingType, address: Address):
         self.name = name
+        self.routing_type = routing_type
         self.address = address
-        self.messages = messages
+        self.message_count = None
+
+    @property
+    def fqqn(self):
+        return "%s::%s" % (self.address.name, self.name)
