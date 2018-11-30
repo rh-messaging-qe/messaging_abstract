@@ -4,8 +4,10 @@ from messaging_abstract.component.server.server import Server
 from messaging_abstract.component.server.service import Service
 from messaging_abstract.node.node import Node
 
+import abc
 
-class Router(Server):
+
+class Router(Server, abc.ABC):
     """
     Abstract messaging Router
     """
