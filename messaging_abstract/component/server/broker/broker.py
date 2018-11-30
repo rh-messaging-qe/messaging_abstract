@@ -25,18 +25,16 @@ class Broker(Server, abc.ABC):
         self.user = kwargs.get('broker_user', None)
         self.password = kwargs.get('broker_password', None)
 
-    @property
     @abc.abstractmethod
-    def queues(self) -> List[Queue]:
+    def queues(self, refresh: bool=True) -> List[Queue]:
         """
         Must return existing queues
         :return:
         """
         pass
 
-    @property
     @abc.abstractmethod
-    def addresses(self) -> List[Address]:
+    def addresses(self, refresh: bool=True) -> List[Address]:
         """
         Must return existing addresses
         :return:
