@@ -9,7 +9,7 @@ files = ["*"]
 
 setup(
     name='messaging_abstract',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(),
     package_data={'messaging_abstract': files},
     license='Apache 2.0',
