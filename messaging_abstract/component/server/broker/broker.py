@@ -7,6 +7,7 @@ from messaging_abstract.node.node import Node
 from .queue import Queue
 from typing import List
 import abc
+import logging
 
 
 class Broker(Server, abc.ABC):
@@ -15,15 +16,20 @@ class Broker(Server, abc.ABC):
     """
     supported_protocols = []
 
-    def __init__(self, name: str, node: Node, executor: Executor, service: Service,
-                 broker_name: str=None, broker_path: str=None, web_port=8161, **kwargs):
+    def __init__(self, name: str, node: Node, executor: Executor, service: Service, **kwargs):
         super(Broker, self).__init__(name, node, executor, service)
 
-        self.broker_name = kwargs.get('broker_name', broker_name)
-        self.broker_path = kwargs.get('broker_path', broker_path)
-        self.web_port = kwargs.get('broker_web_port', web_port)
-        self.user = kwargs.get('broker_user', None)
-        self.password = kwargs.get('broker_password', None)
+        # Log missing arguments
+        required_fields = ['broker_name', 'broker_path']
+        for field in required_fields:
+            if field not in kwargs:
+                logging.error("Missing requirement broker parameter: %s" % field)
+
+        self.broker_name = kwargs.get('broker_name')
+        self.broker_path = kwargs.get('broker_path')
+        self.web_port = kwargs.get('broker_web_port', 8161)
+        self.user = kwargs.get('broker_user', 'admin')
+        self.password = kwargs.get('broker_password', 'admin')
 
     @abc.abstractmethod
     def queues(self, refresh: bool=True) -> List[Queue]:
