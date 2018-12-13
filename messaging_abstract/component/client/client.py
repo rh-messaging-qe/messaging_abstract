@@ -1,7 +1,4 @@
-"""
-    # TODO jstejska: Package description
-"""
-from iqa_common.executor import Executor, Execution
+from iqa_common.executor import Executor
 
 from messaging_abstract.component.component import Component
 from messaging_abstract.node.node import Node

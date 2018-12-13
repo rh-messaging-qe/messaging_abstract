@@ -1,6 +1,7 @@
+from inspect import signature
+
 from iqa_common.executor import Executor, Execution, Command
 from messaging_abstract.node.node import Node
-from inspect import signature
 
 
 class Component(object):
@@ -28,7 +29,6 @@ class Component(object):
         it will be called if kwargs contains the following keys:
         pem_file, key_file, keystore, keystore_pass and keystore_alias.
         :param func:
-        :param extra_args:
         :return:
         """
         # kwargs not informed

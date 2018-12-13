@@ -1,12 +1,8 @@
-"""
-    # TODO jstejska: Package description
-"""
+import re
 
 from autologging import logged, traced
 
 from iqa_common.executor import Executor, Command, Execution, ExecutorAnsible, CommandAnsible
-import re
-import copy
 
 
 @logged

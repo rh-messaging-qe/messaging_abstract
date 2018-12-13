@@ -1,23 +1,20 @@
-"""
-    # TODO jstejska: Package description
-"""
-import tempfile
-from io import FileIO
-
 from iqa_common.executor import Executor
+from messaging_abstract.message import Message
 from messaging_abstract.node.node import Node
 from .client import Client
-from messaging_abstract.message import Message
 
 
 class Sender(Client):
     """Abstract class of client's senders."""
 
-    def __init__(self, name: str, node: Node, executor: Executor, message_buffer: bool=False, **kwargs):
-        """Init
-
-        :param message_buffer: # TODO jstejska: description
-        :type message_buffer: # TODO jstejska: type
+    def __init__(self, name: str, node: Node, executor: Executor, message_buffer: bool = False, **kwargs):
+        """
+        Sender init
+        :param name:
+        :param node:
+        :param executor:
+        :param message_buffer:
+        :param kwargs:
         """
         super(Sender, self).__init__(name, node, executor, **kwargs)
         # Sender settings
@@ -39,6 +36,7 @@ class Sender(Client):
         :type: messaging_abstract.message.Message
         """
         message_to_send = message
+
         if "msg_content" in kwargs:
             message_to_send = kwargs["msg_content"]
 

@@ -1,6 +1,6 @@
+import re
 import traceback
 from enum import Enum
-import re
 
 from iqa_common.executor import Execution, ExecutorAnsible, CommandAnsible, Executor, Command, ExecutorContainer, \
     CommandContainer
@@ -64,7 +64,6 @@ class ServiceSystem(Service):
         def __init__(self, system_state, ansible_state):
             self.system_state = system_state
             self.ansible_state = ansible_state
-
 
     def status(self) -> ServiceStatus:
         """
@@ -136,7 +135,6 @@ class ServiceDocker(Service):
     docker container name.
     """
 
-
     class ServiceDockerState(Enum):
         STARTED = ('start', 'started')
         STOPPED = ('stop', 'stopped')
@@ -145,7 +143,6 @@ class ServiceDocker(Service):
         def __init__(self, system_state, ansible_state):
             self.system_state = system_state
             self.ansible_state = ansible_state
-
 
     def status(self) -> ServiceStatus:
         """
