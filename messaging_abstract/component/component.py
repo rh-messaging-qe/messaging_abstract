@@ -13,6 +13,7 @@ class Component(object):
         self.name: str = name
         self.node: Node = node
         self.executor: Executor = executor
+        self.execution: Execution = None
 
     def execute(self, command: Command) -> Execution:
         return self.executor.execute(command)

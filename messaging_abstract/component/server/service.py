@@ -174,14 +174,14 @@ class ServiceDocker(Service):
     def restart(self) -> Execution:
         return self.executor.execute(self._create_command(self.ServiceDockerState.RESTARTED))
 
-    def enable(self) -> Execution:
+    def enable(self) -> None:
         """
         Simply ignore it (not applicable to containers)
         :return:
         """
         return None
 
-    def disable(self) -> Execution:
+    def disable(self) -> None:
         """
         Simply ignore it (not applicable to containers)
         :return:

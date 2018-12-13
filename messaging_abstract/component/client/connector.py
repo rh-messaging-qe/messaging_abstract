@@ -11,3 +11,15 @@ class Connector(Client):
 
     def connect(self) -> bool:
         raise NotImplementedError
+
+    @property
+    def supported_protocols(self) -> list:
+        raise NotImplementedError
+
+    @property
+    def version(self) -> list:
+        raise NotImplementedError
+
+    @property
+    def implementation(self) -> list:
+        raise NotImplementedError

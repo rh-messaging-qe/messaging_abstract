@@ -16,6 +16,18 @@ class Receiver(Client):
         self.received_messages = 0  # type: int
 
     @property
+    def supported_protocols(self) -> list:
+        raise NotImplementedError
+
+    @property
+    def version(self) -> list:
+        raise NotImplementedError
+
+    @property
+    def implementation(self) -> list:
+        raise NotImplementedError
+
+    @property
     def last_message(self):
         """Method for pickup last received message.
         :return: Last message received or None
@@ -23,7 +35,7 @@ class Receiver(Client):
         """
         return self.messages[-1] if self.messages else None
 
-    def receive_messages(self, message: Message=None):
+    def receive_messages(self, message: Message = None):
         """Method for receive message.
         :param message: Received message to be stored
         :type message: messaging_abstract.message.Message

@@ -23,6 +23,18 @@ class Sender(Client):
         self.sent_messages = 0  # type: int
 
     @property
+    def supported_protocols(self) -> list:
+        raise NotImplementedError
+
+    @property
+    def version(self) -> list:
+        raise NotImplementedError
+
+    @property
+    def implementation(self) -> list:
+        raise NotImplementedError
+
+    @property
     def last_message(self):
         """Method for pickup last received message.
         :return: Last message received or None
@@ -30,7 +42,7 @@ class Sender(Client):
         """
         return self.messages[-1] if self.messages else None
 
-    def send(self, message: Message, **kwargs):
+    def send(self, message: Message = None, **kwargs):
         """Method for send message.
         :param message: Message to be sent
         :type: messaging_abstract.message.Message

@@ -9,22 +9,17 @@ class Client(Component):
     Abstract class for every messaging client
     """
 
-    # Required variables
-    supported_protocols = []
-    version = ''
-
     def __init__(self, name: str, node: Node, executor: Executor, **kwargs):
         super(Client, self).__init__(name, node, executor)
-        self.logs = None  # @TODO
 
     @property
-    def get_supported_protocols(self):
-        return self.supported_protocols
+    def supported_protocols(self) -> list:
+        raise NotImplementedError
 
     @property
-    def get_name(self):
-        return self.name
+    def version(self) -> list:
+        raise NotImplementedError
 
     @property
-    def get_version(self):
-        return self.version
+    def implementation(self) -> list:
+        raise NotImplementedError
