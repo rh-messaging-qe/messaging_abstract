@@ -15,7 +15,7 @@ class Service(object):
     Represents a service used to control a Server component (Router or Broker).
     """
 
-    TIMEOUT = 20
+    TIMEOUT = 30
 
     def __init__(self, name: str, executor: Executor):
         self.name = name
