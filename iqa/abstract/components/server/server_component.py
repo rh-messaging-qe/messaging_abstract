@@ -1,14 +1,25 @@
-from iqa_common.executor import Executor
-
-from messaging_abstract.component.component import Component
-from messaging_abstract.component.server.service import Service
-from messaging_abstract.node.node import Node
+from iqa.abstract.components.component import Component
+from iqa.abstract.components.configuration import Configuration
+from iqa.abstract.components.management.client import ManagementClient
+from iqa.abstract.messaging.listener import Listener
+from iqa.system.node.node import Node
+from iqa.system.service.service import Service
 
 
 class ServerComponent(Component):
     """
     Super class for all Server component implementations (for now Routers and Brokers).
     """
-    def __init__(self, name: str, node: Node, executor: Executor, service: Service):
-        super(ServerComponent, self).__init__(name, node, executor)
+
+    @property
+    def implementation(self):
+        pass
+
+    def __init__(self, name: str, node: Node, service: Service, listeners: list[Listener],
+                 management: ManagementClient=None, configuration: Configuration=None):
+        super(ServerComponent, self).__init__(name, node)
         self.service = service
+        self.name = name
+        self.node = node
+        self.management = management
+        self.configuration = configuration

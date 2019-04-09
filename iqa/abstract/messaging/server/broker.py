@@ -1,23 +1,20 @@
-from iqa_common.executor import Executor
-
-from messaging_abstract.component.server.broker.address import Address
-from messaging_abstract.component.server.server import Server
-from messaging_abstract.component.server.service import Service
-from messaging_abstract.node.node import Node
-from .queue import Queue
 from typing import List
 import abc
 import logging
 
+from iqa.abstract.messaging.destination.address import Address
+from iqa.abstract.messaging.destination.queue import Queue
+from iqa.abstract.messaging.server.messaging_server import MessagingServer
 
-class Broker(Server, abc.ABC):
+
+class Broker(MessagingServer):
     """
     Abstract broker class
     """
     supported_protocols = []
 
-    def __init__(self, name: str, node: Node, executor: Executor, service: Service, **kwargs):
-        super(Broker, self).__init__(name, node, executor, service)
+    def __init__(self, name: str, **kwargs):
+        super(Broker, self).__init__()
 
         # Log missing arguments
         required_fields = ['broker_name', 'broker_path']
@@ -51,45 +48,6 @@ class Broker(Server, abc.ABC):
     def addresses(self, refresh: bool=True) -> List[Address]:
         """
         Must return existing addresses
-        :return:
-        """
-
-    @abc.abstractmethod
-    def create_address(self, address: Address):
-        """
-        Creates an address using its name and specialized type (ANYCAST, MULTICAST).
-        :param address:
-        :return:
-        """
-        pass
-
-    @abc.abstractmethod
-    def create_queue(self, queue: Queue, address: Address, durable: bool=True):
-        """
-        Creates a queue using its name and specialized type, nested to the given address.
-        :param queue:
-        :param address:
-        :param durable:
-        :return:
-        """
-        pass
-
-    @abc.abstractmethod
-    def delete_address(self, name: str, force: bool = False):
-        """
-        Deletes a given address.
-        :param name:
-        :param force:
-        :return:
-        """
-        pass
-
-    @abc.abstractmethod
-    def delete_queue(self, name: str, remove_consumers: bool = False):
-        """
-        Deletes a given queue.
-        :param name:
-        :param remove_consumers:
         :return:
         """
         pass

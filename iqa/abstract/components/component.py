@@ -1,6 +1,8 @@
-from iqa_common.executor import Executor, Execution, Command
-from messaging_abstract.node.node import Node
 from inspect import signature
+
+from iqa.system.command.command_base import Command
+from iqa.system.executor import Execution
+from iqa.system.node.node import Node
 
 
 class Component(object):
@@ -8,13 +10,13 @@ class Component(object):
     Main class that represents a messaging component.
     """
 
-    def __init__(self, name: str, node: Node, executor: Executor):
+    def __init__(self, name: str, node: Node):
         self.name: str = name
         self.node: Node = node
-        self.executor: Executor = executor
 
     def execute(self, command: Command) -> Execution:
-        return self.executor.execute(command)
+        # TODO want to have it here?
+        return self.node.executor.execute(command)
 
     @property
     def implementation(self):

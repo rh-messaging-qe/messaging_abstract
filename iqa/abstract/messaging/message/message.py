@@ -16,7 +16,7 @@ class Message:
                                           |                                          |
      +--------+-------------+-------------+------------+--------------+--------------+--------+
      | header | delivery-   | message-    | properties | application- | application- | footer |
-     |        | annotations | annotations |            | properties   | data         |        |
+     |        | annotations | annotations |            | properties   | data (body)  |        |
      +--------+-------------+-------------+------------+--------------+--------------+--------+
      |                                                                                        |
      '-------------------------------------------+--------------------------------------------'
@@ -31,8 +31,7 @@ class Message:
             properties=Properties(),
             application_properties=None,
             application_data=ApplicationData(),
-            footer=Footer(),
-            body=None):
+            footer=Footer()):
 
         if application_properties is None:
             application_properties = ApplicationProperties()
@@ -43,4 +42,3 @@ class Message:
         self.application_properties = application_properties
         self.application_data = application_data
         self.footer = footer
-        self.body = body

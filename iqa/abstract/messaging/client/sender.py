@@ -1,27 +1,16 @@
-"""
-    # TODO jstejska: Package description
-"""
-import tempfile
-from io import FileIO
+from abc import abstractmethod
 
-from iqa_common.executor import Executor
-from messaging_abstract.node.node import Node
-from .client import Client
-from messaging_abstract.message import Message
+from iqa.abstract.messaging.client import Client
+from iqa.abstract.messaging.message import Message
 
 
 class Sender(Client):
-    """Abstract class of client's senders."""
+    """Abstract class of sender client."""
 
-    def __init__(self, name: str, node: Node, executor: Executor, message_buffer: bool=False, **kwargs):
-        """Init
-
-        :param message_buffer: # TODO jstejska: description
-        :type message_buffer: # TODO jstejska: type
-        """
-        super(Sender, self).__init__(name, node, executor, **kwargs)
+    def __init__(self, name: str, **kwargs):
+        super(Sender, self).__init__(name, **kwargs)
         # Sender settings
-        self.message_buffer = message_buffer  # type: bool
+        self.message_buffer = None  # type: bool
         self.messages = []  # type: list
         self.sent_messages = 0  # type: int
 
@@ -38,17 +27,12 @@ class Sender(Client):
         :param message: Message to be sent
         :type: messaging_abstract.message.Message
         """
-        message_to_send = message
-        if "msg_content" in kwargs:
-            message_to_send = kwargs["msg_content"]
-
         if self.message_buffer:
-            self.messages.append(message_to_send)
-        else:
-            self.messages = [message_to_send]
+            self.messages.append(message)
 
         self.sent_messages += 1
         self._send(message, **kwargs)
 
+    @abstractmethod
     def _send(self, message: Message, **kwargs):
         raise NotImplementedError
