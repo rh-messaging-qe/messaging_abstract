@@ -1,10 +1,10 @@
 import abc
 from abc import ABC
 
-from iqa.abstract.components.management.client import ManagementClient
-from iqa.abstract.messaging.destination.destination import Destination
-from iqa.abstract.messaging.destination.address import Address
-from iqa.abstract.messaging.destination.queue import Queue
+from iqa.messaging.abstract.management.client import ManagementClient
+from iqa.messaging.abstract.destination.destination import Destination
+from iqa.messaging.abstract.destination.address import Address
+from iqa.messaging.abstract.destination.queue import Queue
 
 
 class ManagementBroker(ManagementClient):

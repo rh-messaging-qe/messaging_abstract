@@ -6,7 +6,7 @@ import dpath
 import logging
 import yaml
 
-from iqa.abstract.components.component import Component
+from iqa.messaging.abstract.component import Component
 from iqa.system.command.command_ansible import CommandAnsible
 from iqa.system.command.command_base import Command
 from iqa.system.node import NodeAnsible, NodeLocal
@@ -14,7 +14,6 @@ from iqa.system.node.node_docker import NodeDocker
 from iqa.utils.iqa_exceptions import IQAConfigurationException
 
 LOGGER = logging.getLogger(__name__)
-
 
 
 class Configuration(object):
@@ -67,7 +66,7 @@ class Configuration(object):
 
         :param path: path to configuration file
         :type path: str
-        :return: List of initialized messaging servers (as objects)
+        :return: List of initialized abstract servers (as objects)
         :rtype: list
         """
         with open(path, 'r') as f:

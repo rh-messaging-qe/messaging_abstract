@@ -1,10 +1,10 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
-from iqa.abstract.messaging.client import Client
-from iqa.abstract.messaging.message import Message
+from iqa.messaging.abstract.client import MessagingClient
+from iqa.messaging.abstract.message import Message
 
 
-class Sender(Client):
+class Sender(ABC):
     """Abstract class of sender client."""
 
     def __init__(self, name: str, **kwargs):

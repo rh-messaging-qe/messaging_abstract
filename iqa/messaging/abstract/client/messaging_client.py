@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 
-from iqa.abstract.messaging.listener import Listener
+from iqa.messaging.abstract.client import Client
+from iqa.messaging.abstract.listener import Listener
 
 
-class Client(ABC):
+class MessagingClient(Client):
     """
-    Abstract class for every messaging client
+    Abstract class for every abstract messaging client
     """
 
     # Required variables

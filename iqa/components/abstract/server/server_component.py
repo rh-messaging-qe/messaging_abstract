@@ -1,7 +1,7 @@
-from iqa.abstract.components.component import Component
-from iqa.abstract.components.configuration import Configuration
-from iqa.abstract.components.management.client import ManagementClient
-from iqa.abstract.messaging.listener import Listener
+from iqa.components.abstract.component import Component
+from iqa.components.abstract.configuration import Configuration
+from iqa.components.abstract.management.client import ManagementClient
+from iqa.messaging.abstract.listener import Listener
 from iqa.system.node.node import Node
 from iqa.system.service.service import Service
 

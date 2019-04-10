@@ -7,7 +7,7 @@ from iqa.system.node.node import Node
 
 class Component(object):
     """
-    Main class that represents a messaging component.
+    Main class that represents a abstract component.
     """
 
     def __init__(self, name: str, node: Node):

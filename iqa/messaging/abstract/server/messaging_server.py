@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from iqa.abstract.messaging.listener import Listener
+from iqa.messaging.abstract.listener import Listener
 
 
 class MessagingServer(ABC):
