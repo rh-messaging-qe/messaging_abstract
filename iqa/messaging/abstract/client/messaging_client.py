@@ -15,35 +15,16 @@ class MessagingClient(Client):
     version = None
 
     def __init__(self, name: str, **kwargs):
-        self.url = None  # connectionUrl
-        self.users = None
-        self.logs = None
-        self._messages = None
+        super(MessagingClient).__init__(name, **kwargs)
+        self.message_buffer = None  # type: bool
+        self.messages = []  # type: list
+        self.message_counter = 0  # type: int
 
-    @abstractmethod
-    def set_url(self, url: str):
-        pass
-
-    @abstractmethod
-    def set_endpoint(self, listener : Listener):
-        pass
-
-
-    @abstractmethod
-    def connect(self):
-        """
-        Create connection to the endpoint
-        :return:
-        :rtype:
-        """
-        pass
 
     @property
-    @abstractmethod
-    def get_messages(self):
+    def last_message(self):
+        """Method for pickup last received message.
+        :return: Last message received or None
+        :rtype: messaging_abstract.message.Message
         """
-
-        :return:
-        :rtype: List<Messages>
-        """
-        return self._messages
+        return self.messages[-1] if self.messages else None

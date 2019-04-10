@@ -4,23 +4,12 @@ from iqa.messaging.abstract.client import MessagingClient
 from iqa.messaging.abstract.message import Message
 
 
-class Sender(ABC):
+class Sender(MessagingClient):
     """Abstract class of sender client."""
 
     def __init__(self, name: str, **kwargs):
         super(Sender, self).__init__(name, **kwargs)
         # Sender settings
-        self.message_buffer = None  # type: bool
-        self.messages = []  # type: list
-        self.sent_messages = 0  # type: int
-
-    @property
-    def last_message(self):
-        """Method for pickup last received message.
-        :return: Last message received or None
-        :rtype: messaging_abstract.message.Message
-        """
-        return self.messages[-1] if self.messages else None
 
     def send(self, message: Message, **kwargs):
         """Method for send message.
@@ -28,9 +17,9 @@ class Sender(ABC):
         :type: messaging_abstract.message.Message
         """
         if self.message_buffer:
-            self.messages.append(message)
+            self.messages.append(message)  # single sent Message
 
-        self.sent_messages += 1
+        self.message_counter += 1
         self._send(message, **kwargs)
 
     @abstractmethod
