@@ -1,5 +1,4 @@
-from messaging_abstract.message import ApplicationData, ApplicationProperties, DeliveryAnnotations, \
-    Header, Message, MessageAnnotations, Properties, Footer
+from iqa.messaging.abstract.message import Header, Properties, ApplicationData, ApplicationProperties, Message
 
 
 class TestMessage:

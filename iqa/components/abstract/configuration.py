@@ -6,7 +6,7 @@ import dpath
 import logging
 import yaml
 
-from iqa.messaging.abstract.component import Component
+from iqa.components.abstract.component import Component
 from iqa.system.command.command_ansible import CommandAnsible
 from iqa.system.command.command_base import Command
 from iqa.system.node import NodeAnsible, NodeLocal

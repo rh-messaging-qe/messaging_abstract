@@ -1,5 +1,5 @@
-from messaging_abstract.component import Address, Queue
-from messaging_abstract.component.server.broker.route import RoutingType
+from iqa.components.abstract.component import Address, Queue
+from iqa.components.abstract.component.server.broker.route import RoutingType
 
 address = Address(name='address_1', routing_type=RoutingType.ANYCAST)
 queue = Queue(name='Test_Queue_1', routing_type=RoutingType.ANYCAST, address=address)

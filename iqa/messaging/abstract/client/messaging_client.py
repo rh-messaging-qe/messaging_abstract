@@ -25,6 +25,6 @@ class MessagingClient(Client):
     def last_message(self):
         """Method for pickup last received message.
         :return: Last message received or None
-        :rtype: messaging_abstract.message.Message
+        :rtype: iqa.messaging_abstract.message.Message
         """
         return self.messages[-1] if self.messages else None

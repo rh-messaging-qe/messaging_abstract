@@ -1,5 +1,6 @@
 from typing import List
-from messaging_abstract.component.server.broker.route import RoutingType
+
+from iqa.messaging.abstract.destination.routing_type import RoutingType
 
 
 class Address:

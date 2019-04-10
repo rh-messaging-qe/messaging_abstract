@@ -14,7 +14,7 @@ class Receiver(MessagingClient):
     def receive(self):
         """Method for receive message.
         :param message: Received message to be stored
-        :type message: messaging_abstract.message.Message
+        :type message: iqa.messaging_abstract.message.Message
         """
         recv_messages = self._receive()
         if self.message_buffer:

@@ -8,10 +8,10 @@ from setuptools import setup, find_packages
 files = ["*"]
 
 setup(
-    name='messaging_abstract',
+    name='iqa_messaging_abstract',
     version='0.1.1',
     packages=find_packages(),
-    package_data={'messaging_abstract': files},
+    package_data={'iqa': files},
     license='Apache 2.0',
     description='',
     setup_requires=['pytest-runner'],
