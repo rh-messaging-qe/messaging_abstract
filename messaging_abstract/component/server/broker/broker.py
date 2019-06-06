@@ -30,6 +30,14 @@ class Broker(Server, abc.ABC):
         self.web_port = kwargs.get('broker_web_port', 8161)
         self.user = kwargs.get('broker_user', 'admin')
         self.password = kwargs.get('broker_password', 'admin')
+        self.cluster_member = None
+        self.ha_member = None
+
+    def set_cluster_member(self, cluster_component):
+        self.cluster_member = cluster_component
+
+    def set_ha_member(self, ha_component):
+        self.ha_member = ha_component
 
     @abc.abstractmethod
     def queues(self, refresh: bool=True) -> List[Queue]:
